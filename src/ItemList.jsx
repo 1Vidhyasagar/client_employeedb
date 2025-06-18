@@ -15,7 +15,11 @@ function ItemList() {
   const [total, setTotal] = useState(0);
 
   const fetchItems = async () => {
-    const res = await axios.get("http://localhost:5000/api/items", {
+    const url =
+      // eslint-disable-next-line no-constant-binary-expression
+      "https://server-employeedb.onrender.com/api/items" ||
+      "http://localhost:5000/api/items";
+    const res = await axios.get(url, {
       params: { page, limit, search },
     });
     setItems(res.data.items);
@@ -27,7 +31,12 @@ function ItemList() {
   }, [page, search]);
 
   const handleAdd = async () => {
-    await axios.post("http://localhost:5000/api/items", {
+    const url =
+      // eslint-disable-next-line no-constant-binary-expression
+      "https://server-employeedb.onrender.com/api/items" ||
+      "http://localhost:5000/api/items";
+
+    await axios.post(url, {
       name: newName,
       description: newDesc,
     });
@@ -43,7 +52,11 @@ function ItemList() {
   };
 
   const handleSave = async (id) => {
-    await axios.put(`http://localhost:5000/api/items/${id}`, {
+    const url =
+      // eslint-disable-next-line no-constant-binary-expression
+      `https://server-employeedb.onrender.com/api/items/${id}` ||
+      `http://localhost:5000/api/items/${id}`;
+    await axios.put(url, {
       name: editName,
       description: editDesc,
     });
@@ -54,7 +67,11 @@ function ItemList() {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/items/${id}`);
+    const url =
+      // eslint-disable-next-line no-constant-binary-expression
+      `https://server-employeedb.onrender.com/api/items/${id}` ||
+      `http://localhost:5000/api/items/${id}`;
+    await axios.delete(url);
     fetchItems();
   };
 
